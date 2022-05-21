@@ -1,0 +1,65 @@
+html {
+  font-size: 12pt;
+  color: rgb(16, 15, 15);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+background-image:linear-gradient(to bottom right, darkgray, lightgreen);
+background-image: cover;
+background-repeat: no-repeat;
+}
+
+
+header,
+footer {
+  margin-top:1px;
+  padding: 0 20px;
+  text-align:center;
+}
+
+main {
+
+  border-top-style:double;
+  border-bottom-style:double;
+}
+
+a {
+  display:block;
+  text-align:center;
+}
+
+p{
+  text-align:center;
+}
+
+h1 {
+  font-size: 2rem;
+  background-color: lightsalmon;
+  text-align: center;
+  margin:10px 10px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  background-color: lightsalmon; 
+  text-align:center;
+  margin:10px 10px;
+}
+
+footer {
+  font-size:smaller;
+}
+
+ul {
+  list-style-type: style none;
+  padding:auto;
+  float: left;
+  width: 20%;
+}
+
+main {
+  padding-bottom:800px;
+}
+
+
