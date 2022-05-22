@@ -29,18 +29,34 @@ let seattle = {
 
   //min&max are inclusive mdn I should refer to the class repo instead of the mdn
   function custNumber(max, min) {
-    //min = Math.ceil(min);
-    //max = Math.floor (max);
     return Math.floor(Math.random()* (max-min + 1) + min);
   }
-  //console.log(custNumber); 
 
   custNumber(seattle.maxCustomers,seattle.minCustomers); 
   let salmonCustomers = custNumber(seattle.maxCustomers,seattle.minCustomers); 
-  console.log (salmonCustomers); 
+  //console.log (salmonCustomers); 
 
+  function cookiesSoldPerHour (){
+    for (let i = 0; i <operationHours.length; i++){
+      let salmonCookiesSold = Math.ceil(salmonCustomers * seattle.averageCookiesSold);
+      seattle.soldPerHour.push(salmonCookiesSold);
+      seattle.dailySold += salmonCookiesSold;
+      //console.log (salmonCookiesSold);
+    }
+  }
+  cookiesSoldPerHour();
 
+ function render () {
+    //seattle.cookiesSoldPerHour();
+    let cookiesInSeattle = document.getElementById("seattle-cookiestand");
+    for (let i = 0; i < operationHours.length; i++) {
+      let li = document.createElement("li"); 
+      li.textContent = `${operationHours[i]}: ${seattle.soldPerHour[i]}`
+      cookiesInSeattle.appendChild(li); 
+    }
+  }
+  let li = document.createElement ("li");
+  li.textContent = `Daily Total: ${seattle.dailySold}`;
+  cookiesInSeattle.appendChild(li); 
 
-  // let li = document.createElement ("li");
-  // li.textContent = `Daily Total: ${this.dailySold}`;
-  // cookiesInSeattle.appendChild(li); 
+  render();
