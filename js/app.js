@@ -9,8 +9,8 @@
 //global variables at the top
 
 let myContainer = document.getElementById("table");
+//console.log (myContainer);
 
-let cookiesInSeattle = document.getElementById("seattle-cookiestand");
 let operationHours = [
   "6am",
   "7am",
@@ -27,6 +27,7 @@ let operationHours = [
   "6pm",
   "7pm",
 ];
+let storeData = []; 
 //min&max are inclusive mdn I should refer to the class repo instead of the mdn
 function custNumber(max, min) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -39,6 +40,7 @@ function StoreLocation(name, maxCustomers, minCustomers, averageCookiesSold) {
   this.averageCookiesSold = averageCookiesSold;
   this.soldPerHour = [];
   this.dailySold = 0;
+  storeData.push(this);
 }
 
 //create object sales per city
@@ -67,27 +69,35 @@ StoreLocation.prototype.render = function () {
   this.cookiesSoldPerHour();
   let trOneElem = document.createElement("tr");
   myContainer.appendChild(trOneElem); //think about where you're trying to put the element
+  let dataCell = document.createElement("td");
+  dataCell.textContent = this.name;
+  trOneElem.appendChild(dataCell);
   for (let i = 0; i < operationHours.length; i++) {
-    let dataElem = document.createElement("td");
-    dataElem.innerText = this.soldPerHour[i];
-    trOneElem.appendChild(dataElem);
+    let dataCell = document.createElement("td");
+    dataCell.textContent = this.soldPerHour[i];
+    trOneElem.appendChild(dataCell);
   }
-}
+  let dataCellTotal = document.createElement('td');
+  dataCellTotal.textContent = `Daily Total: ${this.dailySold}`;
+  trOneElem.appendChild(dataCellTotal);
+  return this.soldPerHour;
+};
+
 
   function setTableHeader() {
-    let newRow = document.createElement('tr');
+    let newRow = document.createElement("tr");
     myContainer.appendChild(newRow);
-    let thElem = document.createElement('th');
+    let thElem = document.createElement("th");
     newRow.appendChild(thElem);
-    thElem.textContent = 'Store Location';
+    thElem.textContent = "Store Location";
     for (let i = 0; i < operationHours.length; i++) {
-      let thElem = document.createElement('th');
+      let thElem = document.createElement("th");
       newRow.appendChild(thElem);
       thElem.textContent = `${operationHours[i]}`;
     }
-  let thTotal = document.createElement('th');
+  let thTotal = document.createElement("th");
   newRow.appendChild(thTotal);
-  thTotal.textContent = 'Daily Total';
+  thTotal.textContent = "Daily Total";
 }; 
 
 
@@ -100,9 +110,33 @@ function setTableFooter() {
   let tdElem = document.createElement('td');
   tdElem.textContent = 'Totals';
   newRow.appendChild(tdElem);
+
+let hourlyTotal = 0;
+for (let i = 0; i < operationHours.length; i++) {
+  let hTotal = 0;
+  for (let j = 0; j < storeData.length; j++) {
+    hTotal += (storeData[j].soldPerHour[i]);
+    hourlyTotal += storeData[j].soldPerHour[i];
+  }
+  let dataCell = document.createElement('td');
+  dataCell.textContent = `${hTotal}`;
+  newRow.appendChild(dataCell);
+}
+let totalCell = document.createElement('td');
+totalCell.textContent = hourlyTotal;
+newRow.appendChild(totalCell);
 };
 
+
+  // let totalCell = document.createElement('td');
+  // totalCell.textContent = grandTotal;
+  // newRow.appendChild(totalCell);
+
 //console.log(cookiesSoldPerHour);
+setTableHeader();
+setTableFooter();
+
+//console.log();
 store1.cookiesSoldPerHour();
 store1.render();
 store2.cookiesSoldPerHour();
