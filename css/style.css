@@ -51,15 +51,39 @@ footer {
   font-size:smaller;
 }
 
-ul {
-  list-style-type: style none;
-  padding:auto;
-  float: left;
-  width: 20%;
-}
 
 main {
   padding-bottom:800px;
 }
 
+table{
+  margin-top: 50px;
+  border-style: solid;
+  border-color:rgb(184, 118, 96);
+  justify-content: center;
+  color: rgb(16, 15, 15);
+  min-height:fit-content;
+  margin-left: 150px;
 
+}
+
+th{
+  border-style: solid;
+  border-color: rgb(184, 118, 96);
+  align-content: center;
+  min-width: 50px;
+  font-size: larger;
+  text-decoration: underline;
+}
+
+tr{
+  border-style: solid;
+}
+
+td{
+  text-align: center;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  border-color: rgb(25, 85, 28);
+  margin: 0px;
+}
