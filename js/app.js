@@ -27,7 +27,7 @@ let operationHours = [
   "6pm",
   "7pm",
 ];
-let storeData = []; 
+
 //min&max are inclusive mdn I should refer to the class repo instead of the mdn
 function custNumber(max, min) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -40,7 +40,6 @@ function StoreLocation(name, maxCustomers, minCustomers, averageCookiesSold) {
   this.averageCookiesSold = averageCookiesSold;
   this.soldPerHour = [];
   this.dailySold = 0;
-  storeData.push(this);
 }
 
 //create object sales per city
@@ -97,7 +96,7 @@ StoreLocation.prototype.render = function () {
     }
   let thTotal = document.createElement("th");
   newRow.appendChild(thTotal);
-  thTotal.textContent = "Daily Total";
+  thTotal.textContent = "Daily Location Total";
 }; 
 
 
@@ -112,31 +111,22 @@ function setTableFooter() {
   newRow.appendChild(tdElem);
 
 let hourlyTotal = 0;
-for (let i = 0; i < operationHours.length; i++) {
-  let hTotal = 0;
-  for (let j = 0; j < storeData.length; j++) {
-    hTotal += (storeData[j].soldPerHour[i]);
-    hourlyTotal += storeData[j].soldPerHour[i];
-  }
-  let dataCell = document.createElement('td');
-  dataCell.textContent = `${hTotal}`;
-  newRow.appendChild(dataCell);
-}
+// for (let i = 0; i < operationHours.length; i++)  {
+// let dataCell = document.createElement('td');
+// dataCell.textContent = `${hourlyTotal}`;
+// newRow.appendChild(dataCell);
+// }
 let totalCell = document.createElement('td');
 totalCell.textContent = hourlyTotal;
 newRow.appendChild(totalCell);
 };
 
 
-  // let totalCell = document.createElement('td');
-  // totalCell.textContent = grandTotal;
-  // newRow.appendChild(totalCell);
-
 //console.log(cookiesSoldPerHour);
 setTableHeader();
 setTableFooter();
 
-//console.log();
+//console.log(hourlyTotal);
 store1.cookiesSoldPerHour();
 store1.render();
 store2.cookiesSoldPerHour();
