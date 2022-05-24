@@ -8,7 +8,7 @@
 
 //global variables at the top
 
-let myContainer = document.getElementById("container");
+let myContainer = document.getElementById("table");
 
 let cookiesInSeattle = document.getElementById("seattle-cookiestand");
 let operationHours = [
@@ -41,12 +41,12 @@ function StoreLocation(name, maxCustomers, minCustomers, averageCookiesSold) {
   this.dailySold = 0;
 }
 
-//instantiate sales per city
-new StoreLocation("Seattle", 65, 23, 6.3);
-new StoreLocation("Tokyo", 24, 3, 1.2);
-new StoreLocation("Dubai", 38, 11, 3.7);
-new StoreLocation("Paris", 38, 20, 2.3);
-new StoreLocation("Lima", 16, 2, 4.6);
+//create object sales per city
+let store1 = new StoreLocation("Seattle", 65, 23, 6.3);
+let store2 = new StoreLocation("Tokyo", 24, 3, 1.2);
+let store3 = new StoreLocation("Dubai", 38, 11, 3.7);
+let store4 = new StoreLocation("Paris", 38, 20, 2.3);
+let store5 = new StoreLocation("Lima", 16, 2, 4.6);
 //console.log(StoreLocation5);
 
 //method for finding total cookies sold per hour and tallies daily total sold
@@ -59,32 +59,57 @@ StoreLocation.prototype.cookiesSoldPerHour = function () {
     );
     this.soldPerHour.push(salmonCookiesSold);
     this.dailySold += salmonCookiesSold;
-    console.log(salmonCookiesSold);
+    //console.log(salmonCookiesSold);
   }
 };
 //render each cookie stand
 StoreLocation.prototype.render = function () {
-  //seattle.cookiesSoldPerHour();
-  let containerElem = document.getElementById("stores");
-  let rowElem = document.createElement("tr");
-  for (let i = 0; i < this.operationHours.length; i++) {
-    dataElem.innerText = this.rowInformation[i];
-    rowElem.appendChild(dataElem);
+  this.cookiesSoldPerHour();
+  let trOneElem = document.createElement("tr");
+  myContainer.appendChild(trOneElem); //think about where you're trying to put the element
+  for (let i = 0; i < operationHours.length; i++) {
+    let dataElem = document.createElement("td");
+    dataElem.innerText = this.soldPerHour[i];
+    trOneElem.appendChild(dataElem);
   }
-  containerElem.apprendChild(rowElem);
+}
+
+  function setTableHeader() {
+    let newRow = document.createElement('tr');
+    myContainer.appendChild(newRow);
+    let thElem = document.createElement('th');
+    newRow.appendChild(thElem);
+    thElem.textContent = 'Store Location';
+    for (let i = 0; i < operationHours.length; i++) {
+      let thElem = document.createElement('th');
+      newRow.appendChild(thElem);
+      thElem.textContent = `${operationHours[i]}`;
+    }
+  let thTotal = document.createElement('th');
+  newRow.appendChild(thTotal);
+  thTotal.textContent = 'Daily Total';
+}; 
+
+
+function setTableFooter() {
+  let footElem = document.createElement('tfoot');
+  myContainer.appendChild(footElem);
+  let newRow = document.createElement('tr');
+  footElem.appendChild(newRow);
+
+  let tdElem = document.createElement('td');
+  tdElem.textContent = 'Totals';
+  newRow.appendChild(tdElem);
 };
 
-// let li = document.createElement("li");
-// li.textContent = `Daily Total: ${this.dailySold}`;
-// cookiesInSeattle.appendChild(li);
-
-// function StoreLocation (name, maxCustomers, minCustomers, averageCookiesSold){
-//   this.name = name;
-//   this.maxCustomers= maxCustomers;
-//   this.minCustomers = minCustomers;
-//   this.averageCookiesSold =averageCookiesSold;
-// }
-
 //console.log(cookiesSoldPerHour);
-cookiesSoldPerHour();
-newStoreLocation.render();
+store1.cookiesSoldPerHour();
+store1.render();
+store2.cookiesSoldPerHour();
+store2.render();
+store3.cookiesSoldPerHour();
+store3.render();
+store4.cookiesSoldPerHour();
+store4.render();
+store5.cookiesSoldPerHour();
+store5.render();
