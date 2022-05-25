@@ -42,6 +42,8 @@ function StoreLocation(name, maxCustomers, minCustomers, averageCookiesSold) {
   this.dailySold = 0;
 }
 
+
+
 //create object sales per city
 let store1 = new StoreLocation("Seattle", 65, 23, 6.3);
 let store2 = new StoreLocation("Tokyo", 24, 3, 1.2);
@@ -50,16 +52,15 @@ let store4 = new StoreLocation("Paris", 38, 20, 2.3);
 let store5 = new StoreLocation("Lima", 16, 2, 4.6);
 //console.log(StoreLocation5);
 
+let allStores = []; 
+
 //method for finding total cookies sold per hour and tallies daily total sold
 
 StoreLocation.prototype.cookiesSoldPerHour = function () {
   for (let i = 0; i < operationHours.length; i++) {
-    let salmonCustomers = custNumber(this.maxCustomers, this.minCustomers);
-    let salmonCookiesSold = Math.ceil(
-      salmonCustomers * this.averageCookiesSold
-    );
-    this.soldPerHour.push(salmonCookiesSold);
+    let salmonCookiesSold = Math.ceil(custNumber(this.maxCustomers, this.minCustomers) * this.averageCookiesSold);
     this.dailySold += salmonCookiesSold;
+    this.soldPerHour.push(salmonCookiesSold);
     //console.log(salmonCookiesSold);
   }
 };
@@ -77,9 +78,10 @@ StoreLocation.prototype.render = function () {
     trOneElem.appendChild(dataCell);
   }
   let dataCellTotal = document.createElement('td');
-  dataCellTotal.textContent = `Daily Total: ${this.dailySold}`;
+  dataCellTotal.textContent = this.dailySold;
   trOneElem.appendChild(dataCellTotal);
   return this.soldPerHour;
+
 };
 
 
@@ -110,30 +112,28 @@ function setTableFooter() {
   tdElem.textContent = 'Totals';
   newRow.appendChild(tdElem);
 
-let hourlyTotal = 0;
-// for (let i = 0; i < operationHours.length; i++)  {
-// let dataCell = document.createElement('td');
-// dataCell.textContent = `${hourlyTotal}`;
-// newRow.appendChild(dataCell);
-// }
-let totalCell = document.createElement('td');
-totalCell.textContent = hourlyTotal;
-newRow.appendChild(totalCell);
+  let grandTotal=0;
+  for (let i = 0; i < operationHours.length; i++)  {
+    let hourlyTotal = 0; 
+    for (let j =0; j < allStores.length; j++) {   // iterate over the locations
+      hourlyTotal +=(allStores[j].soldPerHour[i]);
+      grandTotal += (allStores[j].soldPerHour[i]);
+    }
+    let dataCell = document.createElement('td'); 
+    dataCell.textContent = `${hourlyTotal}`;
+    newRow.appendChild(dataCell);
+  }
+  let totalCell = document.createElement('td');
+  totalCell.textContent = grandTotal;
+  newRow.appendChild(totalCell);
 };
 
 
-//console.log(cookiesSoldPerHour);
 setTableHeader();
 setTableFooter();
 
-//console.log(hourlyTotal);
-store1.cookiesSoldPerHour();
 store1.render();
-store2.cookiesSoldPerHour();
 store2.render();
-store3.cookiesSoldPerHour();
 store3.render();
-store4.cookiesSoldPerHour();
 store4.render();
-store5.cookiesSoldPerHour();
 store5.render();
