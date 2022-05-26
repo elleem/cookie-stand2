@@ -52,7 +52,7 @@ let store4 = new StoreLocation("Paris", 38, 20, 2.3);
 let store5 = new StoreLocation("Lima", 16, 2, 4.6);
 //console.log(StoreLocation5);
 
-let allStores = []; 
+let allStores = [store1, store2, store3, store4, store5,]; 
 
 //method for finding total cookies sold per hour and tallies daily total sold
 
@@ -130,10 +130,11 @@ function setTableFooter() {
 
 
 setTableHeader();
-setTableFooter();
 
 store1.render();
 store2.render();
 store3.render();
 store4.render();
 store5.render();
+
+setTableFooter(); //put it a reading order becuase they are building on each other
