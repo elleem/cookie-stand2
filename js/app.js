@@ -11,6 +11,7 @@
 let myContainer = document.getElementById("table");
 //console.log (myContainer);
 
+
 let operationHours = [
   "6am",
   "7am",
@@ -127,6 +128,7 @@ function setTableFooter() {
   totalCell.textContent = grandTotal;
   newRow.appendChild(totalCell);
 };
+
 
 
 setTableHeader();
