@@ -129,43 +129,41 @@ function setTableFooter() {
 
 setTableHeader();
 
-store1.render();
-store2.render();
-store3.render();
-store4.render();
-store5.render();
+// store1.render();
+// store2.render();
+// store3.render();
+// store4.render();
+// store5.render();
 
 //setTableFooter(); //put it a reading order becuase they are building on each other
  
  
  
 
+
 function onSubmit(event) {
   event.preventDefault();
   let form = event.target;
-
+ console.log(form);
   let name = form["name"].value;
   let maxCustomers = Number(form["maxCustomers"].value);
   let minCustomers = Number(form["minCustomers"].value);
   let averageCookiesSold = Number(form["averageCookiesSold"].value);
+  
 
-  let location = {
-    name: name,
-    maxCustomers: maxCustomers,
-    minCustomers: minCustomers,
-    averageCookiesSold: averageCookiesSold,
-  };
-  allLocations.push(submit);
-  for (let i = 0; i <allLocations.length; i++){
-    let location = allLocations[i];
-    location.render();
+  let location = new StoreLocation (name, maxCustomers, minCustomers, averageCookiesSold); 
+  allStores.push(location);
+  console.log(allStores);
+
+  for (let i = 0; i <allStores.length; i++){
+    let location = allStores[i];
+    location.render(); //part of the table, or write it so that it only appends to the table
    }
-   makeTotalsRow ();
+   setTableFooter();
+
+  
 }
 //name, maxCustomers, minCustomers, averageCookiesSold
 
 
-
-
-
-document.getElementById("expansion").addEventLister("submit", onSubmit);
+document.getElementById("expansion").addEventListener("submit", onSubmit);
