@@ -25,6 +25,24 @@
 <div id="stores">
 <table id="table"></table>
 </div>
+
+
+  <form id ="expansion">
+    <fieldset>
+   <legend>New Location</legend>
+  <label> Location Name</label>
+    <input id ="locationName" type = "text" name="locationname" placeholder="Location Name" required="required"/>
+    <label> Minimum Customers</label>
+    <input id ="minCust" type = "number" min="0" name="minimumcust" placeholder="Minimum Customers" required="required"/>
+    <label> Maximum Customers</label>
+    <input id ="maxCust" type = "number" min="0" name="maximumcust" placeholder="Maximum Customers" required="required"/>
+    <label> Average Sales per Customer</label>
+    <input id ="averSales" type = "number" min="0" name="aversales" placeholder="Average Sales" required="required"/>
+    <input type="submit" name="submit"/>
+</fieldset>
+
+</form>
+
 <p>
 <img src="../img/salmon.png"/>
 </p>
