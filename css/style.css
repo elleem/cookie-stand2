@@ -124,6 +124,7 @@ ul {
   display: flex;
   justify-content: space-between; 
   flex-direction: row;
+  width: 100%;
   align-items: flex-start;
   font-family:Georgia, 'Times New Roman', Times, serif ;
 }
@@ -164,6 +165,12 @@ h2 {
   text-align:center;
   margin:10px 10px;
   font-family: 'Roboto', sans-serif;;
+}
+#Locations {
+
+ margin-left: 10px; 
+ margin-right: 15px; 
+
 }
 
 footer {

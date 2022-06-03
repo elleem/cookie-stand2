@@ -9,8 +9,7 @@
 //global variables at the top
 
 let myContainer = document.getElementById("table");
-//console.log (myContainer);
-
+let expansion= document.getElementById("expansion");
 
 let operationHours = [
   "6am",
@@ -43,8 +42,6 @@ function StoreLocation(name, maxCustomers, minCustomers, averageCookiesSold) {
   this.dailySold = 0;
 }
 
-
-
 //create object sales per city
 let store1 = new StoreLocation("Seattle", 65, 23, 6.3);
 let store2 = new StoreLocation("Tokyo", 24, 3, 1.2);
@@ -53,13 +50,15 @@ let store4 = new StoreLocation("Paris", 38, 20, 2.3);
 let store5 = new StoreLocation("Lima", 16, 2, 4.6);
 //console.log(StoreLocation5);
 
-let allStores = [store1, store2, store3, store4, store5,]; 
+let allStores = [store1, store2, store3, store4, store5];
 
 //method for finding total cookies sold per hour and tallies daily total sold
 
 StoreLocation.prototype.cookiesSoldPerHour = function () {
   for (let i = 0; i < operationHours.length; i++) {
-    let salmonCookiesSold = Math.ceil(custNumber(this.maxCustomers, this.minCustomers) * this.averageCookiesSold);
+    let salmonCookiesSold = Math.ceil(
+      custNumber(this.maxCustomers, this.minCustomers) * this.averageCookiesSold
+    );
     this.dailySold += salmonCookiesSold;
     this.soldPerHour.push(salmonCookiesSold);
     //console.log(salmonCookiesSold);
@@ -78,65 +77,87 @@ StoreLocation.prototype.render = function () {
     dataCell.textContent = this.soldPerHour[i];
     trOneElem.appendChild(dataCell);
   }
-  let dataCellTotal = document.createElement('td');
+  let dataCellTotal = document.createElement("td");
   dataCellTotal.textContent = this.dailySold;
   trOneElem.appendChild(dataCellTotal);
   return this.soldPerHour;
-
 };
 
-
-  function setTableHeader() {
-    let newRow = document.createElement("tr");
-    myContainer.appendChild(newRow);
+function setTableHeader() {
+  let newRow = document.createElement("tr");
+  myContainer.appendChild(newRow);
+  let thElem = document.createElement("th");
+  newRow.appendChild(thElem);
+  thElem.textContent = "Store Location";
+  for (let i = 0; i < operationHours.length; i++) {
     let thElem = document.createElement("th");
     newRow.appendChild(thElem);
-    thElem.textContent = "Store Location";
-    for (let i = 0; i < operationHours.length; i++) {
-      let thElem = document.createElement("th");
-      newRow.appendChild(thElem);
-      thElem.textContent = `${operationHours[i]}`;
-    }
+    thElem.textContent = `${operationHours[i]}`;
+  }
   let thTotal = document.createElement("th");
   newRow.appendChild(thTotal);
   thTotal.textContent = "Daily Location Total";
-}; 
-
+}
 
 function setTableFooter() {
-  let footElem = document.createElement('tfoot');
+  let footElem = document.createElement("tfoot");
   myContainer.appendChild(footElem);
-  let newRow = document.createElement('tr');
+  let newRow = document.createElement("tr");
   footElem.appendChild(newRow);
 
-  let tdElem = document.createElement('td');
-  tdElem.textContent = 'Totals';
+  let tdElem = document.createElement("td");
+  tdElem.textContent = "Totals";
   newRow.appendChild(tdElem);
 
-  let grandTotal=0;
-  for (let i = 0; i < operationHours.length; i++)  {
-    let hourlyTotal = 0; 
-    for (let j =0; j < allStores.length; j++) {   // iterate over the locations
-      hourlyTotal +=(allStores[j].soldPerHour[i]);
-      grandTotal += (allStores[j].soldPerHour[i]);
+  let grandTotal = 0;
+  for (let i = 0; i < operationHours.length; i++) {
+    let hourlyTotal = 0;
+    for (let j = 0; j < allStores.length; j++) {
+      // iterate over the locations
+      hourlyTotal += allStores[j].soldPerHour[i];
+      grandTotal += allStores[j].soldPerHour[i];
     }
-    let dataCell = document.createElement('td'); 
+    let dataCell = document.createElement("td");
     dataCell.textContent = `${hourlyTotal}`;
     newRow.appendChild(dataCell);
   }
-  let totalCell = document.createElement('td');
+  let totalCell = document.createElement("td");
   totalCell.textContent = grandTotal;
   newRow.appendChild(totalCell);
-};
-
-
+}
 
 setTableHeader();
 
-store1.render();
-store2.render();
-store3.render();
-store4.render();
-store5.render();
+// store1.render();
+// store2.render();
+// store3.render();
+// store4.render();
+// store5.render();
 
-setTableFooter(); //put it a reading order becuase they are building on each other
+
+function onSubmit(event) {
+  event.preventDefault();
+  let form = event.target;
+ console.log(form);
+  let name = form["name"].value;
+  let maxCustomers = Number(form["maxCustomers"].value);
+  let minCustomers = Number(form["minCustomers"].value);
+  let averageCookiesSold = Number(form["averageCookiesSold"].value);
+  
+
+  let location = new StoreLocation (name, maxCustomers, minCustomers, averageCookiesSold); 
+  allStores.push(location);
+  //console.log(allStores);
+ location.render (); 
+  
+ document.getElementById ("table").deleteTFoot();
+ setTableFooter();
+}
+
+for (let i = 0; i <allStores.length; i++){
+  let location = allStores[i];
+  location.render(); // write it so that it only appends to the table, new append.row append data table
+}
+
+setTableFooter();
+expansion.addEventListener("submit", onSubmit);
