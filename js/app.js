@@ -9,8 +9,7 @@
 //global variables at the top
 
 let myContainer = document.getElementById("table");
-//console.log (myContainer);
-
+let expansion= document.getElementById("expansion");
 
 let operationHours = [
   "6am",
@@ -135,11 +134,6 @@ setTableHeader();
 // store4.render();
 // store5.render();
 
-//setTableFooter(); //put it a reading order becuase they are building on each other
- 
- 
- 
-
 
 function onSubmit(event) {
   event.preventDefault();
@@ -153,17 +147,17 @@ function onSubmit(event) {
 
   let location = new StoreLocation (name, maxCustomers, minCustomers, averageCookiesSold); 
   allStores.push(location);
-  console.log(allStores);
-
-  for (let i = 0; i <allStores.length; i++){
-    let location = allStores[i];
-    location.render(); //part of the table, or write it so that it only appends to the table
-   }
-   setTableFooter();
-
+  //console.log(allStores);
+ location.render (); 
   
+ document.getElementById ("table").deleteTFoot();
+ setTableFooter();
 }
-//name, maxCustomers, minCustomers, averageCookiesSold
 
+for (let i = 0; i <allStores.length; i++){
+  let location = allStores[i];
+  location.render(); // write it so that it only appends to the table, new append.row append data table
+}
 
-document.getElementById("expansion").addEventListener("submit", onSubmit);
+setTableFooter();
+expansion.addEventListener("submit", onSubmit);
