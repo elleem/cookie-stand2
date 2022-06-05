@@ -9,7 +9,7 @@
 //global variables at the top
 
 let myContainer = document.getElementById("table");
-let expansion= document.getElementById("expansion");
+let expansion = document.getElementById("expansion");
 
 let operationHours = [
   "6am",
@@ -134,27 +134,30 @@ setTableHeader();
 // store4.render();
 // store5.render();
 
-
 function onSubmit(event) {
   event.preventDefault();
   let form = event.target;
- console.log(form);
+  console.log(form);
   let name = form["name"].value;
   let maxCustomers = Number(form["maxCustomers"].value);
   let minCustomers = Number(form["minCustomers"].value);
   let averageCookiesSold = Number(form["averageCookiesSold"].value);
-  
 
-  let location = new StoreLocation (name, maxCustomers, minCustomers, averageCookiesSold); 
+  let location = new StoreLocation(
+    name,
+    maxCustomers,
+    minCustomers,
+    averageCookiesSold
+  );
   allStores.push(location);
   //console.log(allStores);
- location.render (); 
-  
- document.getElementById ("table").deleteTFoot();
- setTableFooter();
+  location.render();
+
+  document.getElementById("table").deleteTFoot();
+  setTableFooter();
 }
 
-for (let i = 0; i <allStores.length; i++){
+for (let i = 0; i < allStores.length; i++) {
   let location = allStores[i];
   location.render(); // write it so that it only appends to the table, new append.row append data table
 }
