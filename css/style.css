@@ -76,7 +76,7 @@ footer {
 table{
   margin-top: 50px;
   border-style: solid;
-  border-color:rgb(184, 118, 96);
+  border-color:rgb(25, 85, 28);
   justify-content: center;
   color: rgb(16, 15, 15);
   min-height:fit-content;
@@ -86,7 +86,7 @@ table{
 
 th{
   border-style: solid;
-  border-color: rgb(184, 118, 96);
+  border-color: rgb(25, 85, 28);
   align-content: center;
   min-width: 50px;
   font-size: larger;
@@ -94,6 +94,7 @@ th{
   border-top: solid 2px; 
   border-left: solid 2px;
   border-right: solid 2px; 
+  font-weight:bold;
 }
 
 tr{
@@ -109,11 +110,19 @@ td{
   margin: 0px;
 }
 
-section {
+#fam {
   display:flex;
   flex-direction: row;
   padding:10px; 
+
 }
+#sales {
+  display:flex;
+  flex-direction: row;
+  padding:10px; 
+
+}
+
 
 article {
   margin-left:20px; 
@@ -176,6 +185,14 @@ h2 {
 footer {
   margin-top: 50px; 
   text-align: center;
+}
+
+#headline{
+  text-align: center;
+}
+
+#cookiefish{
+  text-align:center;
 }
 
 
